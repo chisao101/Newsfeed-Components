@@ -129,7 +129,6 @@ const data = [
 
 function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
 
-  const articles = document.querySelector('.articles');
   const article  = document.createElement('div');
   const articleTitle = document.createElement('h2');
   const articleDate = document.createElement('p');
@@ -140,15 +139,15 @@ function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagr
 
   article.classList.add('article');
   articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
   
-  article.appendChild(expandButton);
-  articles.appendChild(article);
-  article.appendChild(articleTitle);
+     
+  article.appendChild(articleTitle); 
   article.appendChild(articleDate);
   article.appendChild(paragraph1);
   article.appendChild(paragraph2);
   article.appendChild(paragraph3);
-  
+  article.appendChild(expandButton);
 
   articleTitle.textContent = title;
   articleDate.textContent = date;
@@ -160,18 +159,14 @@ function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagr
   expandButton.addEventListener('click', () => {
     article.classList.toggle('article-open');
   })
-  console.log(article);
 
   return article;
-
 }
 
+
 data.forEach(articleObj => {
+  const articles = document.querySelector('.articles');
   const newArticle = articleMaker(articleObj);
-  // articles.appendChild(newArticle);
+  articles.appendChild(newArticle);
 })
 
-// panelData.forEach(panelObj => {
-//   const newPanel = makePanel(panelObj);
-//   accordion.appendChild(newPanel);
-// })
