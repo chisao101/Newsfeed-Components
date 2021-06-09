@@ -86,7 +86,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'The Prankster',
+    date: 'Apr 1st, 2021',
+    firstParagraph: `The cheese was slowly dripping down the side of the freshly heated ham slices, which filled the bread to capacity. I could smell the glorious aroma of the carmelized onions that topped the cheese, and it was mesmerizing. As the plate was enroute to my table, I couldn't help but think, \"I hope I didn't forget to bring my wallet, so I can pay for this delicious meal.\"`,
+
+    secondParagraph: `As the server arrived at my table, she tossed the plate down, while looking at the table next to mine. She seemed to be glaring directly into the eyes of the young child at that table. Did she know this child? Had he done something to offend her? I wasn't sure what was going on, but I noticed a slight grin begin to form on the child's face. I began to think that he knew something that I didn't.`,
+
+    thirdParagraph: `As the server turned to walk away, I noticed a bright red, ketchup colored hand print on the back of her otherwise pristine white shirt. The handprint wasn't a full sized adult handprint, but that of someone about the size of the boy at the next table. Now I get it.`
   }
+
 ];
 
 /*
@@ -114,3 +124,49 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+
+  const article  = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const paragraph1 = document.createElement('p'); // deconstructed from data???
+  const paragraph3 = document.createElement('p'); // deconstructed from data??? 
+  const paragraph2 = document.createElement('p'); // deconstructed from data???
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+  
+     
+  article.appendChild(articleTitle); 
+  article.appendChild(articleDate);
+  article.appendChild(paragraph1);
+  article.appendChild(paragraph2);
+  article.appendChild(paragraph3);
+  article.appendChild(expandButton);
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  
+  expandButton.textContent = '+';
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+}
+
+
+data.forEach(articleObj => {
+  const articles = document.querySelector('.articles');
+  const newArticle = articleMaker(articleObj);
+  articles.appendChild(newArticle);
+})
+
